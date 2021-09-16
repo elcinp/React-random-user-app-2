@@ -12,9 +12,9 @@ import padlock from '../assets/padlock.svg'
 
 const Card = () => {
     const [user,setUser] = useState("")
-    const [show,setShow] = useState(true)
+    const [show,setShow] = useState(false)
 
-    const initializeUser = () => {
+    const newUser = () => {
         axios.get('https://randomuser.me/api/')
         .then((response) => {
             setUser(response.data.results[0])
@@ -22,7 +22,7 @@ const Card = () => {
         })
     }
     useEffect(()=>{
-        initializeUser()
+        newUser()
     },[])
 
     const addUser = () => {
@@ -32,6 +32,7 @@ const Card = () => {
         <td>${user.phone}</td>
         <td>${user.dob?.age}</td>
         `
+        document.querySelector("table").style.display="inline"
     }
 
 
@@ -60,7 +61,7 @@ const Card = () => {
                     </ul>
                 </div>
                 <div className="button-container">
-                    <button onClick={initializeUser}>NEW USER</button>
+                    <button onClick={newUser}>NEW USER</button>
                     <button onClick={addUser}>ADD USER</button>
                 </div>
                 <div className="table-container">
@@ -79,13 +80,6 @@ const Card = () => {
                     </table>
                 </div>
             </div>
-
-            
-
-
-
-
-
         </div>
 
 
